@@ -3,9 +3,10 @@ import React from "react";
 import "./WeatherCard.css";
 
 const weatherCard = ({ date, tempMax, weather, celsius }) => {
-  var cloud = require("../../assets/Cloud.png");
-  var overcast = require("../../assets/Overcast.png");
-  var rain = require("../../assets/Rain.png");
+  var cloud = require("../../assets/Cloud-1.png");
+  var overcast = require("../../assets/Overcast-1.png");
+  var rain = require("../../assets/Rain-1.png");
+  var sun = require("../../assets/Sun-1.png");
 
   // Convert epoch time to date
   let dateString = new Date(0);
@@ -27,13 +28,19 @@ const weatherCard = ({ date, tempMax, weather, celsius }) => {
     case "Rain":
       icon = <img src={rain} />;
       break;
+    case "Sun":
+      icon = <img src={sun} />;
+      break;
   }
 
   return (
     <div className="WeatherCard">
-      <p>{dateString.toLocaleString("en-us", { weekday: "short" })}</p>
+      <div className="WeatherCardContent">
+
+      <p className="Date">{dateString.toLocaleString("en-us", { weekday: "short" })}</p>
       {icon}
-      <p>{tempMaxString}°</p>
+      <p className="Temperature">{tempMaxString}°</p>
+      </div>
     </div>
   );
 };

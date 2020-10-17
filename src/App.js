@@ -1,13 +1,14 @@
-import React, { Component } from "react";
-
-import WeatherCard from "./components/WeatherCard/WeatherCard";
+import React, { Component, useEffect } from "react";
 
 import axios from "axios";
 
 import "./App.css";
 
-import SearchIcon from "./assets/SearchIcon.png";
 import UnitButton from "./components/UnitButton/UnitButton";
+import SearchBar from "./components/SearchBar/SearchBar";
+import Forecast from "./components/Forecast/Forecast";
+import ReactIcon from "./assets/React.png";
+import ReactIconBlue from "./assets/ReactBlue.png";
 
 class App extends Component {
   constructor(props) {
@@ -17,34 +18,36 @@ class App extends Component {
       celsius: true,
       location: "Toronto",
       country: "CA",
-      input: "",
       dataLoading: false,
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
+    console.log("[App.js] ComponentDidMount...");
     this.setState({ dataLoading: true });
     axios
       .get(
         "http://api.openweathermap.org/data/2.5/forecast?q=Toronto&appid=9ba589e5a109fb22a3833e80ac287319"
       )
       .then((response) => {
+        let newWeathers = [];
         for (let i = 0; i < response.data.list.length; i += 8) {
           let currentW = response.data.list[i];
-          this.setState({
-            weathers: this.state.weathers.concat([
-              {
-                date: currentW.dt,
-                tempMax: currentW.main.temp_max,
-                weather: currentW.weather[0].main,
-              },
-            ]),
+          newWeathers.push({
+            date: currentW.dt,
+            tempMax: currentW.main.temp_max,
+            weather: currentW.weather[0].main,
           });
         }
-        this.setState({ dataLoading: false });
+
+        this.setState({
+          weathers: newWeathers,
+          country: response.data.city.country,
+          dataLoading: false,
+        });
       });
   }
 
@@ -56,13 +59,12 @@ class App extends Component {
     }
   };
 
-  handleSubmit = () => {
+  handleSubmit = (input) => {
     axios
       .get(
-        `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.input}&appid=9ba589e5a109fb22a3833e80ac287319`
+        `http://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=9ba589e5a109fb22a3833e80ac287319`
       )
       .then((response) => {
-        console.log(response.data.list.length);
         let newWeathers = [];
         for (let i = 0; i < response.data.list.length; i += 8) {
           let currentW = response.data.list[i];
@@ -72,41 +74,28 @@ class App extends Component {
             weather: currentW.weather[0].main,
           });
         }
+        console.log(newWeathers);
         this.setState({
-          weathers: newWeathers,
-          location: this.state.input,
-          input: "",
+          weathers: newWeathers.splice(0, 5),
+          location: input,
+          country: response.data.city.country,
         });
       });
   };
 
-  handleChange(event) {
-    this.setState({ input: event.target.value });
-  }
+  // handleChange(event) {
+  //   this.setState({ input: event.target.value });
+  // }
 
   render() {
-    let weatherDisplay = this.state.weathers.map((weather) => {
-      return (
-        <WeatherCard
-          date={weather.date}
-          tempMax={weather.tempMax}
-          weather={weather.weather}
-          celsius={this.state.celsius}
-        />
-      );
-    });
-
     return (
       <div className="App">
-        <div>
+        <div className="Content">
           <div className="Header">
-            <h1 className="Title">
-              5 Day Forecast{" "}
-              <span className="Location">
-                {" "}
-                - {this.state.location}, {this.state.country}
-              </span>
-            </h1>
+            <SearchBar
+              handleSubmit={(input) => this.handleSubmit(input)}
+              // handleChange={this.handleChange}
+            />
             <div className="ToggleContainer">
               <UnitButton
                 toggled={this.state.celsius}
@@ -121,26 +110,22 @@ class App extends Component {
             </div>
           </div>
           {!this.state.dataLoading ? (
-            <div className="CardContainer">{weatherDisplay}</div>
+            <Forecast
+              location={this.state.location}
+              weathers={this.state.weathers}
+              celsius={this.state.celsius}
+              country={this.state.country}
+              toggleUnit={this.toggleUnit}
+              dataLoading={this.dataLoading}
+            />
           ) : (
             <h1>Loading</h1>
           )}
-          {/* <div className="SearchBarContainer">
-            <img
-              src={SearchIcon}
-              className="SearchIcon"
-              onClick={this.handleSubmit}
-            />
-            <input
-              value={this.state.input}
-              onChange={this.handleChange}
-              className="SearchBar"
-              placeholder="Search Location"
-            />
-          </div> */}
         </div>
         <div className="Footer">
-          <p className="FooterText"> created by daniel agostinho</p>
+          <p className="FooterText"> Made in </p>
+          <img className="ReactIcon" src={ReactIconBlue} />
+          <p className="FooterText">by Daniel Agostinho</p>
         </div>
       </div>
     );

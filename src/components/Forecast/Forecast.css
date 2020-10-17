@@ -1,0 +1,30 @@
+.Forecast {
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column;
+}
+
+.ForecastTitleContainer {
+  display: flex;
+  align-items: center;
+  /* border: 1px solid green; */
+  margin: 0 10px;
+}
+
+.ForecastTitle {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 20px;
+  /* border: 1px solid pink; */
+}
+
+.ForecastLocation {
+  font-weight: 400;
+}
+
+.CardContainer {
+  display: flex;
+  flex-direction: row;
+  /* border: 1px solid red; */
+}
