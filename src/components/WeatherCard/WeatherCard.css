@@ -1,14 +1,19 @@
 .WeatherCard {
   background-color: #fff;
-  border-radius: 16px;
-  font-size: 20px;
   font-weight: 400;
+  width: 60px;
+  height: 72px;
+  font-size: 8px;
+  margin: 4px 4px;
+  border-radius: 6px;
 
-  width: 160px;
-  height: 192px;
-  margin: 0 10px;
   display: flex;
   flex-direction: column;
+}
+
+.WeatherCard img {
+  width: 24px;
+  height: 24px;
 }
 
 .WeatherCardContent {
@@ -17,7 +22,7 @@
   align-items: center;
   justify-content: space-between;
   flex: 1;
-  margin: 20px;
+  margin: 8px;
 }
 
 .Temperature {
@@ -30,48 +35,40 @@
   padding: 0;
 }
 
-@media (max-width: 1200px) {
+@media (min-width: 641px) {
   .WeatherCard {
-    width: 140px;
-    height: 168px;
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 800px) {
-  .WeatherCard {
-    width: 100px;
-    height: 120px;
-    font-size: 14px;
-    margin: 0 4px;
+    width: 120px;
+    height: 144px;
+    font-size: 16px;
+    margin: 0 8px;
+    border-radius: 12px;
   }
 
   .WeatherCard img {
-    max-width: 40px;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .WeatherCard {
-    width: 60px;
-    height: 72px;
-    font-size: 8px;
-    margin: 4px 4px;
-    border-radius: 6px;
-    
-  }
-
-  .WeatherCard img {
-    width: 24px;
-    height: 24px;
+    width: 48px;
+    height: 48px;
   }
 
   .WeatherCardContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    flex: 1;
-    margin: 8px;
+    margin: 16px;
+  }
+}
+
+@media (min-width: 961px) {
+  .WeatherCard {
+    width: 160px;
+    height: 192px;
+    margin: 0 10px;
+    font-size: 20px;
+    border-radius: 16px;
+  }
+
+  .WeatherCard img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .WeatherCardContent {
+    margin: 20px;
   }
 }

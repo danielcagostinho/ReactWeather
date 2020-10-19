@@ -1,5 +1,5 @@
 .Footer {
-  margin-bottom: 200px;
+  margin-bottom: 100px;
   height: 32px;
   /* border: 1px red solid; */
   display: flex;
@@ -15,12 +15,17 @@
   /* border: 1px blue solid; */
 }
 
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 
 .FooterText {
   text-align: center;
-  font-size: 16px;
-  color: rgba(0,0,0,0.34);
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.34);
   padding: 0;
   margin: 0;
   height: 16px;
@@ -28,22 +33,16 @@
   /* border: 1px solid blue; */
 }
 
+@media (min-width: 641px) {
+}
 
-@media only screen and (max-width: 768px) {
+@media (min-width: 961px) {
   .Footer {
-    margin-bottom: 100px;
+    margin-bottom: 200px;
   }
 
   .FooterText {
     text-align: center;
-    font-size: 12px;
-  }
-
-  .ReactIcon {
-    height: 40px;
-    width: 40px;
-    margin: 0 6px;
-    animation: spin 4s linear infinite;
-    /* border: 1px blue solid; */
+    font-size: 16px;
   }
 }

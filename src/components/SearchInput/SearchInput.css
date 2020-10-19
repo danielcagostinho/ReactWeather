@@ -1,11 +1,11 @@
 .SearchInput {
-  width: 400px;
-  font-size: 24px;
+  font-size: 12px;
+  width: 160px;
   font-family: inherit;
   border: none;
   background-color: inherit;
   padding: 4px 0;
-  transition: 0.5s clip-path cubic-bezier(0.5, 1, 0.89, 1),
+  transition: 0.2s clip-path cubic-bezier(0.5, 1, 0.89, 1),
     0.2s opacity cubic-bezier(0.5, 1, 0.89, 1);
   /* border: 1px solid red; */
 }
@@ -22,13 +22,18 @@
 .SearchInputClosed {
   clip-path: polygon(0 0, 0 0, 0% 100%, 0 100%);
   opacity: 0;
-  /* transition: 0.5s clip-path cubic-bezier(0.5, 1, 0.89, 1),
-    0.5s opacity cubic-bezier(0.5, 1, 0.89, 1); */
 }
 
-@media only screen and (max-width: 768px) {
+@media (min-width: 641px) {
   .SearchInput {
-    font-size: 12px;
-    width: 160px;
+    font-size: 18px;
+    width: 200px;
+  }
+}
+
+@media (min-width: 961px) {
+  .SearchInput {
+    width: 400px;
+    font-size: 24px;
   }
 }

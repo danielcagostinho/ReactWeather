@@ -10,6 +10,10 @@ const SearchBar = ({ handleSubmit }) => {
   const [collapsed, setCollapsed] = useState(false);
   
   const [input, setInput] = useState("");
+  
+
+  
+  
   const submitHandler = (e) => {
     e.preventDefault();
     handleSubmit(input);

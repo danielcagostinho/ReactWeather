@@ -1,10 +1,10 @@
 .ToggleButton {
-  height: 52px;
-  width: 52px;
-  margin: 0 10px;
+  height: 30px;
+  width: 30px;
+  font-size: 12px;
+  margin: 0 4px;
   border-radius: 50%;
   background-color: white;
-  font-size: 24px;
   font-weight: 700;
   display: flex;
   justify-content: center;
@@ -12,27 +12,25 @@
   transition: 0.5s background-color cubic-bezier(0.5, 1, 0.89, 1);
 }
 
-
 .UnitToggled {
   background-color: black;
-  color: #FFA011;
+  color: #ffa011;
 }
 
-
-@media (max-width: 960px) {
+@media (min-width: 641px) {
   .ToggleButton {
-    height: 44px;
-    width: 44px;
-    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    font-size: 16px;
+    margin: 0 8px;
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media (min-width: 961px) {
   .ToggleButton {
-    height: 30px;
-    width: 30px;
-    font-size: 12px;
-    margin: 0 4px;
-
+    height: 52px;
+    width: 52px;
+    font-size: 24px;
+    margin: 0 10px;
   }
 }
