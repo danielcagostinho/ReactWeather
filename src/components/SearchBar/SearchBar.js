@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 
 import SearchIcon from "../../assets/SearchCircle-1.png";
+import SearchInput from "../SearchInput/SearchInput";
 
 import "./SearchBar.css";
 
 const SearchBar = ({ handleSubmit }) => {
-  const [input, setInput] = useState("");
+  
   const [collapsed, setCollapsed] = useState(false);
+  
+  const [input, setInput] = useState("");
   const submitHandler = (e) => {
     e.preventDefault();
     handleSubmit(input);
@@ -20,15 +23,9 @@ const SearchBar = ({ handleSubmit }) => {
 
   return (
     <form className="SearchBarContainer" onSubmit={submitHandler}>
-      <div className={`SearchIconContainer${!collapsed ? " SearchIconOpen" : " SearchIconClosed"}`}>
-        <img src={SearchIcon} className="SearchIcon" onClick={toggleSearch} />
-      <input
-        type="text"
-        value={input}
-        onChange={(newText) => setInput(newText.target.value)}
-        className={`SearchBar${!collapsed ? " SearchOpen" : " SearchClosed"}`}
-        placeholder="Search by city name"
-      />
+      <div className={`SearchIconContainer${!collapsed ? " SearchBarOpen" : " SearchBarClosed"}`}>
+        <img src={SearchIcon} className="SearchIcon" onClick={toggleSearch} alt="Search Icon"/>
+        <SearchInput collapsed={collapsed} input={input} setInput={setInput}/>
       </div>
     </form>
   );

@@ -20,16 +20,19 @@ const weatherCard = ({ date, tempMax, weather, celsius }) => {
 
   switch (weather) {
     case "Clouds":
-      icon = <img src={cloud} />;
+      icon = <img src={cloud} alt="Cloud Icon"/>;
       break;
     case "Clear":
-      icon = <img src={overcast} />;
+      icon = <img src={overcast} alt="Overcast Icon"/>;
       break;
     case "Rain":
-      icon = <img src={rain} />;
+      icon = <img src={rain} alt="Rain Icon"/>;
       break;
     case "Sun":
-      icon = <img src={sun} />;
+      icon = <img src={sun} alt="Sun Icon"/>;
+      break;
+    default: 
+      icon = <img src={sun} alt="Sun Icon"/>;
       break;
   }
 

@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./UnitButton.css";
 
 const UnitButton = (props) => {
-  const [isToggled, setIsToggled] = useState(false);
-
   return (
     <div
-      className={`ToggleButton${props.toggled ? " Toggled" : ""}`}
+      className={`ToggleButton${props.toggled ? " UnitToggled" : ""}`}
       onClick={() => props.toggleUnit(props.type)}
     >
       {"°" + props.type}

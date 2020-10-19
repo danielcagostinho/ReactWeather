@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
 
 import axios from "axios";
 
@@ -7,8 +7,7 @@ import "./App.css";
 import UnitButton from "./components/UnitButton/UnitButton";
 import SearchBar from "./components/SearchBar/SearchBar";
 import Forecast from "./components/Forecast/Forecast";
-import ReactIcon from "./assets/React.png";
-import ReactIconBlue from "./assets/ReactBlue.png";
+import Footer from "./components/Footer/Footer";
 
 class App extends Component {
   constructor(props) {
@@ -20,8 +19,6 @@ class App extends Component {
       country: "CA",
       dataLoading: false,
     };
-
-    // this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -52,7 +49,7 @@ class App extends Component {
   }
 
   toggleUnit = (unit) => {
-    if (unit == "C") {
+    if (unit === "C") {
       this.setState({ celsius: true });
     } else {
       this.setState({ celsius: false });
@@ -83,9 +80,6 @@ class App extends Component {
       });
   };
 
-  // handleChange(event) {
-  //   this.setState({ input: event.target.value });
-  // }
 
   render() {
     return (
@@ -94,7 +88,6 @@ class App extends Component {
           <div className="Header">
             <SearchBar
               handleSubmit={(input) => this.handleSubmit(input)}
-              // handleChange={this.handleChange}
             />
             <div className="ToggleContainer">
               <UnitButton
@@ -122,11 +115,7 @@ class App extends Component {
             <h1>Loading</h1>
           )}
         </div>
-        <div className="Footer">
-          <p className="FooterText"> Made in </p>
-          <img className="ReactIcon" src={ReactIconBlue} />
-          <p className="FooterText">by Daniel Agostinho</p>
-        </div>
+        <Footer/>
       </div>
     );
   }
