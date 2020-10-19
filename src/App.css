@@ -12,7 +12,7 @@
 }
 
 .Content {
-  margin-top: 200px;
+  margin-top: 100px;
   display: inline-flex;
   flex-direction: column;
   flex-grow: 1;
