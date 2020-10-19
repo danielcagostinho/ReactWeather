@@ -27,7 +27,7 @@ class App extends Component {
     this.setState({ dataLoading: true });
     axios
       .get(
-        "http://api.openweathermap.org/data/2.5/forecast?q=Toronto&appid=9ba589e5a109fb22a3833e80ac287319"
+        "https://api.openweathermap.org/data/2.5/forecast?q=Toronto&appid=9ba589e5a109fb22a3833e80ac287319"
       )
       .then((response) => {
         let newWeathers = [];
@@ -59,7 +59,7 @@ class App extends Component {
   handleSubmit = (input) => {
     axios
       .get(
-        `http://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=9ba589e5a109fb22a3833e80ac287319`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=9ba589e5a109fb22a3833e80ac287319`
       )
       .then((response) => {
         let newWeathers = [];
