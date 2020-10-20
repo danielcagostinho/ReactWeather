@@ -2,7 +2,7 @@ import React from "react";
 
 import "./WeatherCard.css";
 
-const weatherCard = ({ date, tempMax, weather, celsius }) => {
+const weatherCard = ({ date, tempMax, tempMin, weather, celsius }) => {
   var cloud = require("../../assets/Cloud-1.png");
   var overcast = require("../../assets/Overcast-1.png");
   var rain = require("../../assets/Rain-1.png");
@@ -16,7 +16,12 @@ const weatherCard = ({ date, tempMax, weather, celsius }) => {
     ? Math.round(tempMax - 273.15)
     : Math.round((tempMax * 9) / 5 - 459.67);
 
+    let tempMinString = celsius
+    ? Math.round(tempMin - 273.15)
+    : Math.round((tempMin * 9) / 5 - 459.67);
+
   let icon = null;
+
 
   switch (weather) {
     case "Clouds":
@@ -42,7 +47,7 @@ const weatherCard = ({ date, tempMax, weather, celsius }) => {
 
       <p className="Date">{dateString.toLocaleString("en-us", { weekday: "short" })}</p>
       {icon}
-      <p className="Temperature">{tempMaxString}°</p>
+      <p className="TempMax">{tempMaxString}° <span className="TempMin">{tempMinString}°</span></p>
       </div>
     </div>
   );

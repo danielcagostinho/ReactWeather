@@ -1,0 +1,14 @@
+.ReactIcon {
+  height: 40px;
+  width: 40px;
+  margin: 0 6px;
+  animation: spin 4s linear infinite;
+  /* border: 1px blue solid; */
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

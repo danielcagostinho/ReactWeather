@@ -16,12 +16,13 @@
   transition: 0.5s width cubic-bezier(0.5, 1, 0.89, 1);
 }
 
+
 .SearchBarOpen {
   width: 200px;
 }
 
 .SearchBarClosed {
-  width: 52px;
+  width: 30px;
 }
 
 .SearchBarContainer {
@@ -66,9 +67,16 @@
   .SearchBarOpen {
     width: 532px;
   }
+
+  .SearchBarClosed {
+    width: 40px;
+  }
 }
 
 @media (min-width: 961px) {
+  .SearchBarClosed {
+    width: 52px;
+  }
   .SearchIconContainer {
     width: 52px;
     height: 52px;

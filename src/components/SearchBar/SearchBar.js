@@ -5,31 +5,37 @@ import SearchInput from "../SearchInput/SearchInput";
 
 import "./SearchBar.css";
 
-const SearchBar = ({ handleSubmit }) => {
-  
-  const [collapsed, setCollapsed] = useState(false);
-  
-  const [input, setInput] = useState("");
-  
+const SearchBar = ({ handleSubmit, opened, toggleSearch }) => {
+  // const [collapsed, setCollapsed] = useState(false);
 
-  
-  
+  const [input, setInput] = useState("");
+
   const submitHandler = (e) => {
     e.preventDefault();
-    handleSubmit(input);
     setInput("");
-    setCollapsed(true);
+    handleSubmit(input);
+    
+    // setCollapsed(true);
   };
 
-  const toggleSearch = () => {
-    setCollapsed(!collapsed);
-  };
+  // const toggleSearch = () => {
+  //   setCollapsed(!collapsed);
+  // };
 
   return (
-    <form className="SearchBarContainer" onSubmit={submitHandler}>
-      <div className={`SearchIconContainer${!collapsed ? " SearchBarOpen" : " SearchBarClosed"}`}>
-        <img src={SearchIcon} className="SearchIcon" onClick={toggleSearch} alt="Search Icon"/>
-        <SearchInput collapsed={collapsed} input={input} setInput={setInput}/>
+    <form className={`SearchBarContainer`} onSubmit={submitHandler}>
+      <div
+        className={`SearchIconContainer ${
+          opened ? "SearchBarOpen " : "SearchBarClosed "
+        }`}
+      >
+        <img
+          src={SearchIcon}
+          className="SearchIcon"
+          onClick={toggleSearch}
+          alt="Search Icon"
+        />
+        <SearchInput opened={opened} input={input} setInput={setInput} />
       </div>
     </form>
   );

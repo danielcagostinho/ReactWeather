@@ -8,6 +8,9 @@ import UnitButton from "./components/UnitButton/UnitButton";
 import SearchBar from "./components/SearchBar/SearchBar";
 import Forecast from "./components/Forecast/Forecast";
 import Footer from "./components/Footer/Footer";
+import { getWeather } from "./utils/utils";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
+import Spinner from "./components/Spinner/Spinner";
 
 class App extends Component {
   constructor(props) {
@@ -18,30 +21,21 @@ class App extends Component {
       location: "Toronto",
       country: "CA",
       dataLoading: false,
+      error: false,
+      searchOpen: true,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    console.log("[App.js] ComponentDidMount...");
     this.setState({ dataLoading: true });
     axios
       .get(
         "https://api.openweathermap.org/data/2.5/forecast?q=Toronto&appid=9ba589e5a109fb22a3833e80ac287319"
       )
       .then((response) => {
-        let newWeathers = [];
-        for (let i = 0; i < response.data.list.length; i += 8) {
-          let currentW = response.data.list[i];
-          newWeathers.push({
-            date: currentW.dt,
-            tempMax: currentW.main.temp_max,
-            weather: currentW.weather[0].main,
-          });
-        }
-
         this.setState({
-          weathers: newWeathers,
+          weathers: getWeather(response).splice(0, 5),
           country: response.data.city.country,
           dataLoading: false,
         });
@@ -56,30 +50,35 @@ class App extends Component {
     }
   };
 
+  toggleSearch = () => {
+    this.setState({ searchOpen: !this.state.searchOpen });
+  };
+
   handleSubmit = (input) => {
+    this.setState({ dataLoading: true });
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=9ba589e5a109fb22a3833e80ac287319`
       )
       .then((response) => {
-        let newWeathers = [];
-        for (let i = 0; i < response.data.list.length; i += 8) {
-          let currentW = response.data.list[i];
-          newWeathers.push({
-            date: currentW.dt,
-            tempMax: currentW.main.temp_max,
-            weather: currentW.weather[0].main,
-          });
-        }
-        console.log(newWeathers);
         this.setState({
-          weathers: newWeathers.splice(0, 5),
+          weathers: getWeather(response).splice(0, 5),
           location: input,
           country: response.data.city.country,
+          dataLoading: false,
+          searchOpen: false,
+          error: false,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({
+          input: "",
+          dataLoading: false,
+          error: true,
         });
       });
   };
-
 
   render() {
     return (
@@ -88,6 +87,9 @@ class App extends Component {
           <div className="Header">
             <SearchBar
               handleSubmit={(input) => this.handleSubmit(input)}
+              error={this.state.error}
+              opened={this.state.searchOpen}
+              toggleSearch={this.toggleSearch}
             />
             <div className="ToggleContainer">
               <UnitButton
@@ -102,7 +104,13 @@ class App extends Component {
               />
             </div>
           </div>
-          {!this.state.dataLoading ? (
+          {this.state.dataLoading ? (
+            <div className="SpinnerContainer">
+              <Spinner />
+            </div>
+          ) : this.state.error ? (
+            <ErrorMessage />
+          ) : (
             <Forecast
               location={this.state.location}
               weathers={this.state.weathers}
@@ -111,11 +119,9 @@ class App extends Component {
               toggleUnit={this.toggleUnit}
               dataLoading={this.dataLoading}
             />
-          ) : (
-            <h1>Loading</h1>
           )}
         </div>
-        <Footer/>
+        <Footer />
       </div>
     );
   }

@@ -11,6 +11,7 @@ const Forecast = ({ location, weathers, celsius, country, dataLoading }) => {
         key={weather.date}
         date={weather.date}
         tempMax={weather.tempMax}
+        tempMin={weather.tempMin}
         weather={weather.weather}
         celsius={celsius}
       />
