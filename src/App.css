@@ -35,9 +35,25 @@
 }
 
 .SpinnerContainer {
-  width: 880px;
-  height: 250px;
+  height: 161px;
+  width: 320px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+@media (min-width:641px){
+  .SpinnerContainer {
+    height: 280px;
+    width: 732px;
+  }
+}
+
+
+@media (min-width:961px){
+  .SpinnerContainer {
+    height: 250px;
+    width: 880px;
+  }
 }

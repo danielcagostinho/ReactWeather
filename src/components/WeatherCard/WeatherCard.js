@@ -22,6 +22,7 @@ const weatherCard = ({ date, tempMax, tempMin, weather, celsius }) => {
 
   let icon = null;
 
+  console.log(weather)
 
   switch (weather) {
     case "Clouds":
@@ -37,7 +38,7 @@ const weatherCard = ({ date, tempMax, tempMin, weather, celsius }) => {
       icon = <img src={sun} alt="Sun Icon"/>;
       break;
     default: 
-      icon = <img src={sun} alt="Sun Icon"/>;
+      icon = null;
       break;
   }
 
