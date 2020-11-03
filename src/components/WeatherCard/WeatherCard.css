@@ -22,7 +22,7 @@
   align-items: center;
   justify-content: space-between;
   flex: 1;
-  margin: 16px;
+  margin: 16px 4px;
 }
 
 .TempMax {
